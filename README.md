@@ -28,7 +28,7 @@ Hit `Alt+T` to get some text replacement tools e.g.
 * HTML Encode
 * ..
 
-![Tools](images/commands.gif)
+![Tools](images/Commands.gif)
 
 Will replace all selections in the current editor.
 
