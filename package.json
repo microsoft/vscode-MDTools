@@ -1,0 +1,37 @@
+{
+	"name": "30-Command",
+	"version": "0.0.1",
+	"publisher": "Sean",
+	"activationEvents": [
+		"onLanguage:markdown"
+	],
+	"engines": {
+		"vscode": ">=0.9.0-pre.1"
+	},
+	"main": "./out/extension",
+	"contributes": {
+		"commands": [
+			{
+				"command": "extension.textFunctions",
+				"title": "Text Functions",
+				"description": "Text Functions on selections"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "extension.textFunctions",
+				"key": "Alt+T"
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "node ./node_modules/vscode/bin/compile",
+		"compile": "node ./node_modules/vscode/bin/compile -watch -p ./"
+	},
+	"dependencies": {
+		"underscore.string": "^3.2.2"
+	},
+	"devDependencies": {
+		"vscode": ">=0.9.0-pre.1"
+	}
+}
