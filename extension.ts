@@ -16,40 +16,9 @@ import us = require('underscore.string');
 export function activate() {
 	console.log('Congratulations, your extension "TextTools" is now active!');
 
-    let wordCountStatus = new WordCountStatus();
-
 	vscode.commands.registerCommand('extension.textFunctions', textFunctions);
 }
 
-
-
-// Word Count /////////////////////////////////////
-class WordCountStatus {
-    constructor() {
-        window.onDidChangeTextEditorSelection((textEditor) => {
-            if (!textEditor) {
-                // No more open editors
-                return;
-            }
-            let doc = textEditor.textEditor.getTextDocument();
-			
-			// Only update status if an MD file
-			if (doc.getLanguageId() === "markdown") {
-				window.setStatusBarMessage("Word Count [" + calcWordCount(doc.getText()) + "]");
-			} else {
-				window.setStatusBarMessage("");
-			}
-
-        });
-    }
-}
-
-function calcWordCount(text): number {
-	text = text.replace(/(< ([^>]+)<)/g, '').replace(/\s+/g, ' ');
-	text = text.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
-
-	return text.split(" ").length;
-}
 
 // Selections test /////////////////////////////////////
 function workWithSelections() {
@@ -113,6 +82,7 @@ function cleanString(e: vscode.TextEditor, d: vscode.TextDocument, sel: vscode.S
 }
 
 
+
 function titleize(e: vscode.TextEditor, d: vscode.TextDocument, sel: vscode.Selection[]) {
 	// itterate through the elections and convert all text to Upper
 	for (var x = 0; x < sel.length; x++) {
@@ -133,8 +103,8 @@ function escapeHTML(e: vscode.TextEditor, d: vscode.TextDocument, sel: vscode.Se
 			edit.replace(sel[x], txt);
 		
 			// fix the selection as it could now be longer or shorter
-			let startPos: Position = new Position(sel[x].start.line, sel[x].start.column);
-			let endPos: Position = new Position(sel[x].end.line,sel[x].start.column + txt.length);
+			let startPos: Position = new Position(sel[x].start.line, sel[x].start.character);
+			let endPos: Position = new Position(sel[x].end.line,sel[x].start.character + txt.length);
 			let replaceRange : Range = new Range(startPos, endPos);
 		
 			e.setSelection(replaceRange);	
