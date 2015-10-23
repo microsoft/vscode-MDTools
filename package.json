@@ -1,8 +1,13 @@
 {
 	"name": "MDTools",
 	"description": "Text replacement for Markdown",
-	"version": "0.0.2",
+	"version": "0.1.0",
 	"publisher": "seanmcbreen",
+	"keywords": [
+		"_Markdown",
+		"ASCII Art",
+		"Text"
+	],
 	"activationEvents": [
 		"onLanguage:markdown"
 	],
@@ -25,9 +30,6 @@
 			}
 		]
 	},
-	"keywords": [
-		"Markdown", "Linter", "Spell", "Grammar"
-	],
 	"scripts": {
 		"vscode:prepublish": "node ./node_modules/vscode/bin/compile",
 		"compile": "node ./node_modules/vscode/bin/compile -watch -p ./"

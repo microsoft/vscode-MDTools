@@ -1,42 +1,27 @@
+// import {workspace, languages, Diagnostic, DiagnosticSeverity, Location, Range, Disposable, Modes, TextDocument, Position} from 'vscode';
 import * as vscode from 'vscode';
-
-import window = vscode.window;
-import workspace = vscode.workspace;
-import EditorOptions = vscode.TextEditorOptions;
+import Window = vscode.window;
 import QuickPickItem = vscode.QuickPickItem;
 import QuickPickOptions = vscode.QuickPickOptions;
 import Document = vscode.TextDocument;
 import Position = vscode.Position;
 import Range = vscode.Range;
-import InputBoxOptions = vscode.InputBoxOptions;
+import Selection = vscode.Selection;
+import TextDocument = vscode.TextDocument;
+import TextEditor = vscode.TextEditor;
 
+//import InputBoxOptions = InputBoxOptions;
+
+var figlet = require('figlet');
 import us = require('underscore.string');
-
 
 export function activate() {
 	console.log('Congratulations, your extension "TextTools" is now active!');
-
 	vscode.commands.registerCommand('extension.textFunctions', textFunctions);
 }
 
-
-// Selections test /////////////////////////////////////
-function workWithSelections() {
-	var e = window.getActiveTextEditor();
-	var d = e.getTextDocument();
-		
-	// Subset of text
-	var start = new Position(1, 1);
-	var end = new Position(10, 3);
-	var range = new Range(start, end);
-	console.log("Range: " + d.getTextInRange(range));
-		
-	// All text
-	console.log("All: " + d.getText());
-}
-
 // String Functions Helper//////////////////////////////
-function toUpper(e: vscode.TextEditor, d: vscode.TextDocument, sel: vscode.Selection[]) {
+function toUpper(e: TextEditor, d: TextDocument, sel: Selection[]) {
 	// itterate through the elections and convert all text to Upper
 	for (var x = 0; x < sel.length; x++) {
 		e.edit(function(edit) {
@@ -47,7 +32,7 @@ function toUpper(e: vscode.TextEditor, d: vscode.TextDocument, sel: vscode.Selec
 	}
 }
 
-function toLower(e: vscode.TextEditor, d: vscode.TextDocument, sel: vscode.Selection[]) {
+function toLower(e: TextEditor, d: TextDocument, sel: Selection[]) {
 	// itterate through the elections and convert all text to Upper
 	for (var x = 0; x < sel.length; x++) {
 		e.edit(function(edit) {
@@ -58,98 +43,49 @@ function toLower(e: vscode.TextEditor, d: vscode.TextDocument, sel: vscode.Selec
 	}
 }
 
-function swapCase(e: vscode.TextEditor, d: vscode.TextDocument, sel: vscode.Selection[]) {
-	// itterate through the elections and convert all text to Upper
-	for (var x = 0; x < sel.length; x++) {
-		e.edit(function(edit) {
-			let txt: string = d.getTextInRange(new Range(sel[x].start, sel[x].end));
-			edit.replace(sel[x], us.swapCase(txt));
-		});
-		e.setSelections(sel)
-	}
-}
-
-
-function cleanString(e: vscode.TextEditor, d: vscode.TextDocument, sel: vscode.Selection[]) {
-	// itterate through the elections and convert all text to Upper
-	for (var x = 0; x < sel.length; x++) {
-		e.edit(function(edit) {
-			let txt: string = d.getTextInRange(new Range(sel[x].start, sel[x].end));
-			edit.replace(sel[x], us.clean(txt));
-		});
-		e.setSelections(sel)
-	}
-}
-
-
-
-function titleize(e: vscode.TextEditor, d: vscode.TextDocument, sel: vscode.Selection[]) {
-	// itterate through the elections and convert all text to Upper
-	for (var x = 0; x < sel.length; x++) {
-		e.edit(function(edit) {
-			let txt: string = d.getTextInRange(new Range(sel[x].start, sel[x].end));
-			edit.replace(sel[x], us.titleize(txt));
-		});
-		e.setSelections(sel)
-	}
-}
-
-function escapeHTML(e: vscode.TextEditor, d: vscode.TextDocument, sel: vscode.Selection[]) {
+// This function takes a callbac function for the text formatting 'formatCB', 
+// if there are any args pass an array as 'argsCB'
+function processSelection(e: TextEditor, d: TextDocument, sel: Selection[], formatCB, argsCB) {
 	// itterate through the selections
 	for (var x = 0; x < sel.length; x++) {
 		e.edit(function(edit) {
-			// process the selection and replace in editor
-			var txt: string = us.escapeHTML(d.getTextInRange(new Range(sel[x].start, sel[x].end)));
+			let txt: string = d.getTextInRange(new Range(sel[x].start, sel[x].end));
+			
+			if (argsCB.length > 0) {
+				argsCB.splice(0, 0, txt);
+				txt = formatCB.apply(this, argsCB);
+			} else {
+				txt = formatCB(txt);
+			}
 			edit.replace(sel[x], txt);
 		
 			// fix the selection as it could now be longer or shorter
 			let startPos: Position = new Position(sel[x].start.line, sel[x].start.character);
-			let endPos: Position = new Position(sel[x].end.line,sel[x].start.character + txt.length);
-			let replaceRange : Range = new Range(startPos, endPos);
-		
-			e.setSelection(replaceRange);	
+			let endPos: Position = new Position(sel[x].start.line + txt.split(/\r\n|\r|\n/).length, sel[x].start.character + txt.length);
+			let replaceRange: Range = new Range(startPos, endPos);
+
+			e.setSelection(replaceRange);
 		});
 	}
 }
 
-function unescapeHTML(e: vscode.TextEditor, d: vscode.TextDocument, sel: vscode.Selection[]) {
-	// itterate through the elections and convert all text to Upper
-	for (var x = 0; x < sel.length; x++) {
-		e.edit(function(edit) {
-			let txt: string = d.getTextInRange(new Range(sel[x].start, sel[x].end));
-			edit.replace(sel[x], us.unescapeHTML(txt));
-		});
-		e.setSelections(sel)
-	}
-}
-
-function reverse(e: vscode.TextEditor, d: vscode.TextDocument, sel: vscode.Selection[]) {
-	// itterate through the elections and convert all text to Upper
-	for (var x = 0; x < sel.length; x++) {
-		e.edit(function(edit) {
-			edit.replace(sel[x], us.reverse(d.getTextInRange(new Range(sel[x].start, sel[x].end))));
-		});
-		e.setSelections(sel)
-	}
-}
-
-// Text Functions /////////////////////////////////////
+// Main menu /////////////////////////////////////
 function textFunctions() {
 	var opts: QuickPickOptions = { matchOnDescription: true, placeHolder: "What do you want to do to the selection(s)?" };
-
 	var items: QuickPickItem[] = [];
+
 	items.push({ label: "toUpper", description: "Convert [aBc] to [ABC]" });
 	items.push({ label: "toLower", description: "Convert [aBc] to [abc]" });
 	items.push({ label: "swapCase", description: "Convert [aBc] to [AbC]" });
 	items.push({ label: "Titleize", description: "Convert [hello world] to [Hello World]" });
-	items.push({ label: "Clean String", description: "Convert [hello        world] to [hello world]" });
+	items.push({ label: "Clean String", description: "Convert [hello......world] to [hello world]" });
 	items.push({ label: "Reverse", description: "Convert [hello world] to [world hello]" });
 	items.push({ label: "Escape HTML", description: "Convert [<div>hello] to [&lt;div&gt;hello]" });
 	items.push({ label: "UnEscape HTML", description: "Convert [&lt;div&gt;hello] to [<div>hello]" });
+	items.push({ label: "ASCII Art", description: "Convert [hello] to ASCII Art" });
 
-
-	window.showQuickPick(items).then((selection) => {
-		let e = window.getActiveTextEditor();
+	Window.showQuickPick(items).then((selection) => {
+		let e = Window.getActiveTextEditor();
 		let d = e.getTextDocument();
 		let sel = e.getSelections();
 
@@ -161,30 +97,42 @@ function textFunctions() {
 				toLower(e, d, sel);
 				break;
 			case "swapCase":
-				swapCase(e, d, sel);
+				processSelection(e, d, sel, us.swapCase, []);
 				break;
 			case "Titleize":
-				titleize(e, d, sel);
+				processSelection(e, d, sel, us.titleize, []);
 				break;
 			case "Clean String":
-				cleanString(e, d, sel);
+				processSelection(e, d, sel, us.clean, []);
 				break;
 			case "Reverse":
-				reverse(e, d, sel);
+				processSelection(e, d, sel, us.reverse, []);
 				break;
 			case "Escape HTML":
-				escapeHTML(e, d, sel);
+				processSelection(e, d, sel, us.escapeHTML, []);
 				break;
 			case "UnEscape HTML":
-				unescapeHTML(e, d, sel);
+				processSelection(e, d, sel, us.unescapeHTML, []);
+				break;
+			case "ASCII Art":
+				items = [];
+                items.push({ label: "Standard", description: "User the Standard font" });
+                items.push({ label: "Graffiti", description: "User the Graffiti font" });
+				items.push({ label: "Banner", description: "User the Banner font" });
+				items.push({ label: "Basic", description: "User the Basic font" });
+				items.push({ label: "Cybermedium", description: "User the Cybermedium font" });
+				items.push({ label: "Larry 3D", description: "User the Larry 3D font" });
+				items.push({ label: "Nancyj", description: "User the Nancyj font" });
+				items.push({ label: "Poison", description: "User the Poison font" });
+				items.push({ label: "Star Wars", description: "User the Star Wars font" });
+
+				Window.showQuickPick(items).then((selection) => {
+					processSelection(e, d, sel, figlet.textSync, [selection.label]);
+				});
 				break;
 			default:
 				console.log("hum this should not have happend - no selction")
 				break;
 		}
-
 	});
 }
-
-
-
