@@ -1,13 +1,17 @@
 {
 	"name": "MDTools",
 	"description": "Text replacement for Markdown",
-	"version": "0.1.0",
+	"version": "0.1.2",
 	"publisher": "seanmcbreen",
+	"displayName": "Markdown Tools",
 	"keywords": [
+		"$featured",
 		"_Markdown",
 		"ASCII Art",
 		"Text"
 	],
+	"license":"SEE LICENSE IN LICENSE.md",
+	"icon": "images/icon.jpg",
 	"activationEvents": [
 		"onLanguage:markdown"
 	],
@@ -35,7 +39,8 @@
 		"compile": "node ./node_modules/vscode/bin/compile -watch -p ./"
 	},
 	"dependencies": {
-		"underscore.string": "^3.2.2"
+		"underscore.string": "^3.2.2",
+		"figlet": "^1.1.1"
 	},
 	"devDependencies": {
 		"vscode": "*"

@@ -116,17 +116,11 @@ function textFunctions() {
 				break;
 			case "ASCII Art":
 				items = [];
-                items.push({ label: "Standard", description: "User the Standard font" });
-                items.push({ label: "Graffiti", description: "User the Graffiti font" });
-				items.push({ label: "Banner", description: "User the Banner font" });
-				items.push({ label: "Basic", description: "User the Basic font" });
-				items.push({ label: "Cybermedium", description: "User the Cybermedium font" });
-				items.push({ label: "Larry 3D", description: "User the Larry 3D font" });
-				items.push({ label: "Nancyj", description: "User the Nancyj font" });
-				items.push({ label: "Poison", description: "User the Poison font" });
-				items.push({ label: "Star Wars", description: "User the Star Wars font" });
-
-				Window.showQuickPick(items).then((selection) => {
+                figlet.fontsSync().forEach(function (font) {
+					items.push({ label: font, description: "User the "+ font + " font" });
+				}, this);
+				
+				Window.showQuickPick(items).then(function (selection) {
 					processSelection(e, d, sel, figlet.textSync, [selection.label]);
 				});
 				break;
