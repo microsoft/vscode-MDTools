@@ -3,7 +3,6 @@
 	"description": "Text replacement for Markdown",
 	"version": "0.1.3",
 	"publisher": "seanmcbreen",
-	"displayName": "Markdown Tools",
 	"categories":[
 		"Other"
 	],
