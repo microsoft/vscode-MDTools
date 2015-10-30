@@ -10,6 +10,9 @@
 		"ASCII Art",
 		"Text"
 	],
+	"categories":[
+		"Other"
+	],
 	"license":"SEE LICENSE IN LICENSE.md",
 	"icon": "images/icon.jpg",
 	"activationEvents": [
