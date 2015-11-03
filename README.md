@@ -23,7 +23,7 @@ Hit `Alt+T` to get some text replacement tools e.g.
 * HTML Encode
 * ..
 
-![Tools](https://raw.githubusercontent.com/Microsoft/vscode-MDTools/master/images/Commands.gif?token=ABAKNht0zQAflmtD7dHhXvDDmNVkCFX_ks5WNAKUwA%3D%3D)
+![Tools](images/commands.gif)
 
 If you select ASCII Art you will get a secondary menu where you can choose the font.
 

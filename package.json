@@ -1,13 +1,30 @@
 {
 	"name": "MDTools",
-	"description": "Text replacement for Markdown",
-	"version": "0.1.4",
+	"description": "Text replacement functions and ASCII Art for Markdown",
+	"version": "0.1.8",
 	"publisher": "seanmcbreen",
 	"categories":[
-		"Other"
+		"Other", "Language"
 	],
 	"license":"SEE LICENSE IN LICENSE.md",
 	"icon": "images/icon.jpg",
+	"bugs": {
+		"url": "https://github.com/Microsoft/vscode-spell-check/issues"
+	},
+	"homepage": "https://github.com/Microsoft/vscode-spell-check/blob/master/README.md",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/Microsoft/vscode-spell-check"
+	},
+	"galleryBanner" : {
+		"color": "#5c2d91",
+		"theme" : "dark"
+	},
+	"keywords": [
+		"Spelling",
+		"Grammar",
+		"_Markdown"
+	],
 	"activationEvents": [
 		"onLanguage:markdown"
 	],
