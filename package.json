@@ -1,7 +1,7 @@
 {
 	"name": "MDTools",
 	"description": "Text replacement functions and ASCII Art for Markdown",
-	"version": "0.0.4",
+	"version": "0.0.12",
 	"publisher": "seanmcbreen",
 	"categories":[
 		"Test"
@@ -9,12 +9,12 @@
 	"license":"SEE LICENSE IN LICENSE.md",
 	"icon": "images/MDToolsIcon.svg",
 	"bugs": {
-		"url": "https://github.com/Microsoft/vscode-spell-check/issues"
+		"url": "https://github.com/Microsoft/vscode-MDTools/issues"
 	},
-	"homepage": "https://github.com/Microsoft/vscode-spell-check/blob/master/README.md",
+	"homepage": "https://github.com/Microsoft/vscode-MDTools/blob/master/README.md",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Microsoft/vscode-spell-check.git"
+		"url": "https://github.com/Microsoft/vscode-MDTools.git"
 	},
 	"galleryBanner" : {
 		"color": "#5c2d91",
