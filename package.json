@@ -1,7 +1,7 @@
 {
 	"name": "MDTools",
 	"description": "Text replacement functions and ASCII Art for Markdown",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"publisher": "seanmcbreen",
 	"categories":[
 		"Test"
