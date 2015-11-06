@@ -27,7 +27,7 @@ function toUpper(e: TextEditor, d: TextDocument, sel: Selection[]) {
 			let txt: string = d.getText(new Range(sel[x].start, sel[x].end));
 			edit.replace(sel[x], txt.toUpperCase());
 		});
-		e.updateSelection(sel);
+		//e.updateSelection(sel);
 	}
 }
 
@@ -39,7 +39,7 @@ function toLower(e: TextEditor, d: TextDocument, sel: Selection[]) {
 			let txt: string = d.getText(new Range(sel[x].start, sel[x].end));
 			edit.replace(sel[x], txt.toLowerCase());
 		});
-		e.updateSelection(sel)
+		//e.updateSelection(sel);
 	}
 }
 
@@ -66,7 +66,7 @@ function processSelection(e: TextEditor, d: TextDocument, sel: Selection[], form
 			let endPos: Position = new Position(sel[x].start.line + txt.split(/\r\n|\r|\n/).length, sel[x].start.character + txt.length);
 			let replaceRange: Range = new Range(startPos, endPos);
 
-			e.updateSelection(replaceRange);
+			//e.updateSelection(replaceRange);
 		});
 	}
 }
@@ -128,7 +128,7 @@ function textFunctions() {
 				});
 				break;
 			default:
-				console.log("hum this should not have happend - no selction")
+				console.log("hum this should not have happend - no selection")
 				break;
 		}
 	});

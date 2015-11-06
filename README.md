@@ -1,31 +1,30 @@
-# README
+# Functionality
 
-This is an example of how to extend [VS Code](http://code.visualstudio.com/Docs/Extensions).  
+This is an example of how to extend [VS Code] with some useful text manipulation tools.  These include:
 
-It covers off the following core concepts:
-* Activating your code when a Markdown file is loaded
-* Working with QuickOpen to create the menu (and sub menu)
-* Binding a function to a keystroke [Alt+T] and `command` - which opens up the menu
-* Leveraging external Node modules 
-	* [figlet](https://www.npmjs.com/package/figlet) = ASCII art, 
-	* [underscore.string](https://www.npmjs.com/package/underscore.string) = string processing
-* Grabbing the selected content from the text editor, processing it and replacing it
-* Adding metadata to the `project.json` so the extension looks OK in the gallery
+* Common casing operations e.g. toUpper, ToLower, Reverse and more
+* HTML encoding and Decoding
+* ASCII Art
 
-# Keybinding 'Alt+T' - Text Tools
-Also available as `command` by pressing `F1` the typing `Text Functions`.
+# Install
 
-Hit `Alt+T` to get some text replacement tools e.g.
+Open up VS Code and hit `F1` and type `ext` select install and type `spell` hit enter and reload window to enable. 
 
-* toUpper
-* toLower
-* Reverse
-* HTML Encode
-* ..
+![install and work](images/spell-install.gif)
 
-![Tools](images/Commands.gif)
 
-If you select ASCII Art you will get a secondary menu where you can choose the font.
+# Update a selection
 
-# Versions
-* 0.1.0 - Added ASCII Art and refactored code base to 50% of size
+The extension is activated when you load up a `Markdown` file and you open up a menu of commands by pressing `Alt+T`.   Multi selection is supported for all commands.  If you select ASCII Art you will get a secondary menu where you can choose the font.
+
+```
+BOO
+```
+
+
+# Known Issues
+
+Here are a few common issues.
+
+* The selection zone post edit can be mis-mapped.
+ 

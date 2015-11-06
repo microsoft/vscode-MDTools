@@ -24,7 +24,7 @@
 		"onLanguage:markdown"
 	],
 	"engines": {
-		"vscode": "*"
+		"vscode": "0.10.x"
 	},
 	"main": "./out/extension",
 	"contributes": {
