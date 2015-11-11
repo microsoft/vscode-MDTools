@@ -1,10 +1,10 @@
 {
 	"name": "MDTools",
 	"description": "Text replacement functions and ASCII Art for Markdown",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"publisher": "seanmcbreen",
 	"categories":[
-		"Languages", "Other"
+		"Other"
 	],
 	"license":"SEE LICENSE IN LICENSE.md",
 	"icon": "images/MDToolsIcon.svg",
