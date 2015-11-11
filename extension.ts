@@ -44,33 +44,26 @@ function toLower(e: TextEditor, d: TextDocument, sel: Selection[]) {
 // This function takes a callback function for the text formatting 'formatCB', 
 // if there are any args pass an array as 'argsCB'
 function processSelection(e: TextEditor, d: TextDocument, sel: Selection[], formatCB, argsCB) {
-	// itterate through the selections
-	
 	var replaceRanges: Selection[] = [];
-	
-	//do the edits
 	e.edit(function(edit) {
+		// itterate through the selections
 		for (var x = 0; x < sel.length; x++) {
 			let txt: string = d.getText(new Range(sel[x].start, sel[x].end));
-
-			console.log(x + " ... " + txt);
 			if (argsCB.length > 0) {
 				argsCB.splice(0, 0, txt);
 				txt = formatCB.apply(this, argsCB);
 			} else {
 				txt = formatCB(txt);
 			}
+			
+			//replace the txt in the current select and work our any range adjustments
 			edit.replace(sel[x], txt);
-			console.log(x + " ... " + txt);
-					
-			// fix the selection as it could now be longer or shorter
 			let startPos: Position = new Position(sel[x].start.line, sel[x].start.character);
 			let endPos: Position = new Position(sel[x].start.line + txt.split(/\r\n|\r|\n/).length - 1, sel[x].start.character + txt.length);
 			replaceRanges.push(new Selection(startPos, endPos));
 		}
-		
 	});
-e.selections = replaceRanges;
+	e.selections = replaceRanges;
 }
 
 // Main menu /////////////////////////////////////
