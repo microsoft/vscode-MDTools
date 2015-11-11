@@ -31,7 +31,6 @@ function toUpper(e: TextEditor, d: TextDocument, sel: Selection[]) {
 	}
 }
 
-// TODO [P1] - it would be better to use a format like I have for the Underscore calls below - more common code
 function toLower(e: TextEditor, d: TextDocument, sel: Selection[]) {
 	// itterate through the elections and convert all text to Upper
 	for (var x = 0; x < sel.length; x++) {
@@ -39,7 +38,6 @@ function toLower(e: TextEditor, d: TextDocument, sel: Selection[]) {
 			let txt: string = d.getText(new Range(sel[x].start, sel[x].end));
 			edit.replace(sel[x], txt.toLowerCase());
 		});
-		//e.updateSelection(sel);
 	}
 }
 
@@ -47,10 +45,15 @@ function toLower(e: TextEditor, d: TextDocument, sel: Selection[]) {
 // if there are any args pass an array as 'argsCB'
 function processSelection(e: TextEditor, d: TextDocument, sel: Selection[], formatCB, argsCB) {
 	// itterate through the selections
-	for (var x = 0; x < sel.length; x++) {
-		e.edit(function(edit) {
+	
+	var replaceRanges: Selection[] = [];
+	
+	//do the edits
+	e.edit(function(edit) {
+		for (var x = 0; x < sel.length; x++) {
 			let txt: string = d.getText(new Range(sel[x].start, sel[x].end));
-			
+
+			console.log(x + " ... " + txt);
 			if (argsCB.length > 0) {
 				argsCB.splice(0, 0, txt);
 				txt = formatCB.apply(this, argsCB);
@@ -58,17 +61,16 @@ function processSelection(e: TextEditor, d: TextDocument, sel: Selection[], form
 				txt = formatCB(txt);
 			}
 			edit.replace(sel[x], txt);
-		
+			console.log(x + " ... " + txt);
+					
 			// fix the selection as it could now be longer or shorter
 			let startPos: Position = new Position(sel[x].start.line, sel[x].start.character);
-			// TODO [p1] the end position is not right - do something that increases or decreases the size 
-			// of the selection to see issue e.g. ASC II art or HTML encode/decode
-			let endPos: Position = new Position(sel[x].start.line + txt.split(/\r\n|\r|\n/).length, sel[x].start.character + txt.length);
-			let replaceRange: Range = new Range(startPos, endPos);
-
-			//e.updateSelection(replaceRange);
-		});
-	}
+			let endPos: Position = new Position(sel[x].start.line + txt.split(/\r\n|\r|\n/).length - 1, sel[x].start.character + txt.length);
+			replaceRanges.push(new Selection(startPos, endPos));
+		}
+		
+	});
+e.selections = replaceRanges;
 }
 
 // Main menu /////////////////////////////////////
@@ -119,11 +121,11 @@ function textFunctions() {
 			case "ASCII Art":
 				// build a full list of the fonts for the drop down
 				items = [];
-                figlet.fontsSync().forEach(function (font) {
-					items.push({ label: font, description: "User the "+ font + " font" });
+                figlet.fontsSync().forEach(function(font) {
+					items.push({ label: font, description: "User the " + font + " font" });
 				}, this);
-				
-				Window.showQuickPick(items).then(function (selection) {
+
+				Window.showQuickPick(items).then(function(selection) {
 					processSelection(e, d, sel, figlet.textSync, [selection.label]);
 				});
 				break;

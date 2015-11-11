@@ -1,7 +1,7 @@
 {
 	"name": "MDTools",
 	"description": "Text replacement functions and ASCII Art for Markdown",
-	"version": "0.0.15",
+	"version": "0.1.0",
 	"publisher": "seanmcbreen",
 	"categories":[
 		"Languages", "Other"
@@ -51,6 +51,6 @@
 		"figlet": "^1.1.1"
 	},
 	"devDependencies": {
-		"vscode": "next"
+		"vscode": "0.10.x"
 	}
 }
