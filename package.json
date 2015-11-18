@@ -1,12 +1,12 @@
 {
 	"name": "MDTools",
 	"description": "Text replacement functions and ASCII Art for Markdown",
-	"version": "0.1.3",
+	"version": "0.1.4",
 	"publisher": "seanmcbreen",
 	"categories":[
 		"Other"
 	],
-	"license":"SEE LICENSE IN LICENSE.md",
+	"license":"SEE LICENSE IN LICENSE.txt",
 	"icon": "images/MDToolsIcon.svg",
 	"bugs": {
 		"url": "https://github.com/Microsoft/vscode-MDTools/issues"
