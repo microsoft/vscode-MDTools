@@ -1,7 +1,7 @@
 {
 	"name": "MDTools",
-	"description": "Text replacement functions and ASCII Art for Markdown",
-	"version": "0.1.4",
+	"description": "Text replacement functions e.g. change case, reverse and ASCII Art for Markdown.",
+	"version": "0.2.0",
 	"publisher": "seanmcbreen",
 	"categories":[
 		"Other"
