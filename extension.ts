@@ -82,6 +82,9 @@ function textFunctions() {
 	items.push({ label: "ASCII Art", description: "Convert [hello] to ASCII Art" });
 
 	Window.showQuickPick(items).then((selection) => {
+		if (!selection) {
+			return;
+		}
 		let e = Window.activeTextEditor;
 		let d = e.document;
 		let sel = e.selections;
