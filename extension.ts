@@ -117,11 +117,14 @@ function textFunctions() {
 			case "ASCII Art":
 				// build a full list of the fonts for the drop down
 				items = [];
-                figlet.fontsSync().forEach(function(font) {
+				figlet.fontsSync().forEach(function(font) {
 					items.push({ label: font, description: "User the " + font + " font" });
 				}, this);
 
 				Window.showQuickPick(items).then(function(selection) {
+					if (!selection) {
+						return;
+					}
 					processSelection(e, d, sel, figlet.textSync, [selection.label]);
 				});
 				break;
