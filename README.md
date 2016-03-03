@@ -1,6 +1,6 @@
 # Functionality
 
-This is an example of how to extend [VS Code] with some useful text manipulation tools.  These include:
+This is an example of how to extend [VS Code](https://github.com/Microsoft/vscode) with some useful text manipulation tools.  These include:
 
 * Common casing operations e.g. toUpper, ToLower, SwapCase, Reverse and more
 * HTML encoding and Decoding
