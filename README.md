@@ -1,6 +1,8 @@
 # Functionality
 
-This is an example of how to extend [VS Code](https://github.com/Microsoft/vscode) with some useful text manipulation tools.  These include:
+This is an example of how to extend [VS Code](https://github.com/Microsoft/vscode) with some useful text manipulation tools.  This extension works for all file types.
+
+These include:
 
 * Common casing operations e.g. toUpper, ToLower, SwapCase, Reverse and more
 * HTML encoding and Decoding
@@ -23,4 +25,14 @@ The extension is activated when you load up a `Markdown` file and you open up a 
 Here are a few common issues.
 
 * The selection zone post edit can be mis-mapped.
+
+# Updates
+
+## 1.0.0
+
+* Fixed some multi selection bugs
+    * fix: ASCII Art, toUpper, ToLower all now support multi-selection
+* Added in a few more options
+    * Slugify
+    * Camelize
  

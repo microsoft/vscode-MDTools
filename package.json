@@ -1,7 +1,7 @@
 {
 	"name": "MDTools",
 	"description": "Text replacement functions e.g. change case, reverse and ASCII Art for Markdown.",
-	"version": "0.2.1",
+	"version": "1.0.0",
 	"publisher": "seanmcbreen",
 	"categories":[
 		"Other"
@@ -24,7 +24,7 @@
 		"onLanguage:markdown"
 	],
 	"engines": {
-		"vscode": "0.10.x"
+		"vscode": "^1.0.0"
 	},
 	"main": "./out/extension",
 	"contributes": {
@@ -44,14 +44,15 @@
 	},
 	"scripts": {
 		"vscode:prepublish": "node ./node_modules/vscode/bin/compile",
-		"compile": "node ./node_modules/vscode/bin/compile -watch -p ./"
+        "compile": "node ./node_modules/vscode/bin/compile -watch -p ./",
+        "postinstall": "node ./node_modules/vscode/bin/install"
 	},
 	"dependencies": {
 		"underscore.string": "^3.2.2",
 		"figlet": "^1.1.1"
 	},
 	"devDependencies": {
-		"vscode": "0.10.x",
-		"typescript": "^1.6.2"
+		"vscode": "^0.11.0",
+		"typescript": "^1.8.5"
 	}
 }
