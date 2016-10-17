@@ -17,7 +17,7 @@ Open up VS Code and hit `F1` and type `ext` select Install Extension and type `m
 
 # Update a selection
 
-The extension is activated when you load up a `Markdown` file and you open up a menu of commands by pressing `Alt+T`. Multi selection is supported for all commands. If you select ASCII Art you will get a secondary menu where you can choose the font.
+The extension is activated for all file types, and  you open up a menu of commands by pressing `Alt+T`. Multi selection is supported for all commands. If you select ASCII Art you will get a secondary menu where you can choose the font.
 
 
 # Known Issues
