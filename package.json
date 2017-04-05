@@ -1,7 +1,7 @@
 {
 	"name": "MDTools",
 	"description": "Text replacement functions e.g. change case, reverse and ASCII Art for all file types.",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"publisher": "seanmcbreen",
 	"categories":[
 		"Other"

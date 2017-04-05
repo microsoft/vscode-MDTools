@@ -25,14 +25,4 @@ The extension is activated for all file types, and  you open up a menu of comman
 Here are a few common issues.
 
 * The selection zone post edit can be mis-mapped.
-
-# Updates
-
-## 1.0.0
-
-* Fixed some multi selection bugs
-    * fix: ASCII Art, toUpper, ToLower all now support multi-selection
-* Added in a few more options
-    * Slugify
-    * Camelize
  
