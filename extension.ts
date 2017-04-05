@@ -70,6 +70,12 @@ function processSelection(e: TextEditor, d: TextDocument, sel: Selection[], form
 
 // Main menu /////////////////////////////////////
 function textFunctions() {
+	
+	if (!vscode.window.activeTextEditor) {
+		vscode.window.showInformationMessage('Open a file first to manipulate text selections');
+		return;
+	}      
+	
 	var opts: QuickPickOptions = { matchOnDescription: true, placeHolder: "What do you want to do to the selection(s)?" };
 	var items: QuickPickItem[] = [];
 
