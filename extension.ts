@@ -42,6 +42,21 @@ function toLower(e: TextEditor, d: TextDocument, sel: Selection[]) {
 
 }
 
+function toReverse(e: TextEditor, d: TextDocument, sel: Selection[]) {
+	e.edit(function (edit) {
+		// itterate through the selections and convert all text to Lower
+		for (var x = 0; x < sel.length; x++) {
+			let txt: string = d.getText(new Range(sel[x].start, sel[x].end));
+			let words: string[] = (txt as string).split(' ');
+			let string: string[] = [];
+			for (let word in words) {
+				string.unshift(word);
+			}
+			edit.replace(sel[x], string.join(' '));
+		}
+	});
+}
+
 // This function takes a callback function for the text formatting 'formatCB', 
 // if there are any args pass an array as 'argsCB'
 function processSelection(e: TextEditor, d: TextDocument, sel: Selection[], formatCB, argsCB) {
@@ -116,7 +131,7 @@ function textFunctions() {
 				processSelection(e, d, sel, us.clean, []);
 				break;
 			case "Reverse":
-				processSelection(e, d, sel, us.reverse, []);
+				toReverse(e, d, sel);
 				break;
 			case "Escape HTML":
 				processSelection(e, d, sel, us.escapeHTML, []);
