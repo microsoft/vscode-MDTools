@@ -70,12 +70,12 @@ function processSelection(e: TextEditor, d: TextDocument, sel: Selection[], form
 
 // Main menu /////////////////////////////////////
 function textFunctions() {
-	
+
 	if (!vscode.window.activeTextEditor) {
 		vscode.window.showInformationMessage('Open a file first to manipulate text selections');
 		return;
-	}      
-	
+	}
+
 	var opts: QuickPickOptions = { matchOnDescription: true, placeHolder: "What do you want to do to the selection(s)?" };
 	var items: QuickPickItem[] = [];
 
@@ -85,7 +85,7 @@ function textFunctions() {
 	items.push({ label: "Titleize", description: "Convert [hello MD tools] to [Hello MD Tools]" });
 	items.push({ label: "Camelize", description: "Convert [hello MD-tools] to [HelloMDTools]" });
 	items.push({ label: "Clean String", description: "Convert [hello......world] to [hello world]" });
-	items.push({ label: "Reverse", description: "Convert [hello world] to [world hello]" });
+	items.push({ label: "Reverse", description: "Convert [hello world] to [dlrow olleh]" });
 	items.push({ label: "Escape HTML", description: "Convert [<div>hello] to [&lt;div&gt;hello]" });
 	items.push({ label: "UnEscape HTML", description: "Convert [&lt;div&gt;hello] to [<div>hello]" });
 	items.push({ label: "Slugify", description: "Convert [txt for an URL] to [txt-for-an-url]" });
@@ -126,10 +126,10 @@ function textFunctions() {
 				break;
 			case "Camelize":
 				processSelection(e, d, sel, us.camelize, []);
-				break;			
+				break;
 			case "Slugify":
 				processSelection(e, d, sel, us.slugify, []);
-				break;			
+				break;
 			case "ASCII Art":
 				// build a full list of the fonts for the drop down
 				items = [];
